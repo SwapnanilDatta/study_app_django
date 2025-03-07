@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="row">
+    <!-- Search Bar -->
+    <div class="col-12 mb-4">
+        <form class="d-flex" method="GET" action="{%url 'home'%}">
+            <input class="form-control me-2" type="search" placeholder="Search rooms..." name="q">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Topic Sidebar -->
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Topics</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{% url 'home' %}" class="list-group-item list-group-item-action {% if not selected_topic %}active{% endif %}">
+                    All Topics
+                </a>
+                {% for topic in topics %}
+                    <a href="{% url 'home' %}?topic={{ topic.name|urlencode }}" class="list-group-item list-group-item-action {% if selected_topic == topic.name %}active{% endif %}">
+                        {{ topic.name }}
+                <span class="badge bg-primary rounded-pill float-end">
+                        {{ topic.room_set.count }}
+                </span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9">
+        <h1 class="text-center mb-4">Welcome to Study Platform</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Latest Study Rooms</h5>
+                <div class="list-group">
+                    {% for room in query %}
+                    <div class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h3 class="badge bg-primary">{{ room.topic.name }}</h3>
+                            <div>
+                                <a href="{% url 'update_room' room.id %}" class="btn btn-sm btn-outline-primary">Update</a>
+                                <a href="{% url 'delete' room.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            </div>
+                        </div>
+                        <a href="{% url 'room_detail' room.id %}" class="text-decoration-none text-dark">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="mb-1">{{ room.name }} @ {{room.host}}</h6>
+                                <small>Created: {{ room.created|date:"M d, Y" }}</small>
+                            </div>
+                            <p class="mb-1">{{ room.description|default:"No description available" }}</p>
+                            <small class="text-muted">Last updated: {{ room.updated|date:"M d, Y H:i" }}</small>
+                        </a>
+                    </div>
+                    {% empty %}
+                    <div class="list-group-item text-center">
+                        <p class="mb-0">No study rooms available yet.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'create_room' %}" class="btn btn-success ms-2">Create New Room</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
