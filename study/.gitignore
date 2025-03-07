@@ -1,0 +1,51 @@
+# Python files
+*.py[cod]
+__pycache__/
+*.so
+
+# Django files
+*.log
+*.pot
+*.pyc
+__pycache__/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+*.env
+
+# Database files
+db.sqlite3
+*.db
+
+# Media folder
+media/
+
+# Static files
+staticfiles/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# Test files
+coverage.xml
+.tox/
+.nox/
+.cache/
+
+# Pytest cache
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
