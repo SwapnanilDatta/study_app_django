@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.urls import path
-from .views import home,room,create_room,update_room,delete
+from .views import home,room,create_room,update_room,delete,loginpage,logoutUser
 
 
 
 
 urlpatterns = [
+    path('login/', loginpage, name='loginpage'),
+    path('logout/', logoutUser, name='logout'),
     path('',home,name='home'),
     path('room/<int:pk>/', room, name='room_detail'),
     path('create-room/', create_room, name='create_room'),

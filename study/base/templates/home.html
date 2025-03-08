@@ -45,8 +45,10 @@
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h3 class="badge bg-primary">{{ room.topic.name }}</h3>
                             <div>
+                                {% if request.user == room.host %}
                                 <a href="{% url 'update_room' room.id %}" class="btn btn-sm btn-outline-primary">Update</a>
                                 <a href="{% url 'delete' room.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                {%endif%}
                             </div>
                         </div>
                         <a href="{% url 'room_detail' room.id %}" class="text-decoration-none text-dark">
