@@ -13,7 +13,7 @@
                     </div>
                 {% endfor %}
             {% endif %}
-
+            {% if page == 'login' %}
             <!-- Login Form -->
             <div class="card">
                 <div class="card-body">
@@ -32,8 +32,28 @@
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
                     </form>
+                    <p>havent signed up yet</p>
+                    <a href="{% url 'registerpage' %}" class="btn btn-primary">Register</a>
                 </div>
             </div>
+            {% else %}
+            <!-- Register Form -->
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Login</h3>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        
+                        <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                    </form>
+                    <p>already signed up?</p>
+                    <a href="{% url 'loginpage' %}" class="btn btn-primary">Login</a>
+                </div>
+            </div>
+            {% endif %}
+
         </div>
     </div>
 </div>

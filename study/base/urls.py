@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.urls import path
-from .views import home,room,create_room,update_room,delete,loginpage,logoutUser
+from .views import home,room,create_room,update_room,delete,loginpage,logoutUser,registerpage
 
 
 
 
 urlpatterns = [
+    path('register/', registerpage, name='registerpage'),
     path('login/', loginpage, name='loginpage'),
     path('logout/', logoutUser, name='logout'),
     path('',home,name='home'),
