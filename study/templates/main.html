@@ -24,8 +24,11 @@
                         <a class="nav-link" href="{% url 'home' %}">Rooms</a>
                     </li>
                     {% if request.user.is_authenticated %}
+                        
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Welcome, {{ request.user.username }}</a>
+                            <a class="nav-link" href="{% url 'user-profile' request.user.username %}">
+                                Welcome, {{ request.user.username }}
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'logout' %}">Logout</a>

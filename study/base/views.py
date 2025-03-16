@@ -152,5 +152,19 @@ def deletemessage(request, pk):
     message.delete()
     return redirect('room_detail', pk=room_id)
 
+def userProfile(request, username):
+    user = get_object_or_404(User, username=username)
+    rooms = Room.objects.filter(host=user)
+    room_messages = Message.objects.filter(user=user)
+    topics = Topic.objects.all()
+    
+    context = {
+        'user': user,
+        'rooms': rooms,
+        'room_messages': room_messages,
+        'topics': topics
+    }
+    return render(request, 'profile.html', context)
+
 
 

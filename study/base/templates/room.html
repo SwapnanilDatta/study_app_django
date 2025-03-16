@@ -12,7 +12,7 @@
                     <span class="badge bg-primary">{{ room.topic.name }}</span>
                     <hr>
                     <p class="text-muted">
-                        <small>Host: {{ room.host.username }}</small><br>
+                        <small>Host: <a href="{% url 'user-profile' room.host.username %}">{{ room.host.username }}</a></small><br>
                         <small>Created: {{ room.created|date:"M d, Y" }}</small><br>
                         <small>Last updated: {{ room.updated|date:"M d, Y H:i" }}</small>
                     </p>
@@ -47,7 +47,9 @@
                 <div class="message-container mb-3 p-3 border-bottom">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            <strong>{{ message.user.username }}</strong>
+                            <strong>
+                                <a href="{% url 'user-profile' message.user.username %}">{{ message.user.username }}</a>
+                            </strong>
                             <small class="text-muted ms-2">{{ message.created|date:"M d, Y H:i" }}</small>
                             {% if request.user == message.user %}
                                 <a href="{% url 'delete-message' message.id %}" class="text-danger ms-2">Delete</a>

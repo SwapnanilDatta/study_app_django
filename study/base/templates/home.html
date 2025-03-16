@@ -53,7 +53,10 @@
                         </div>
                         <a href="{% url 'room_detail' room.id %}" class="text-decoration-none text-dark">
                             <div class="d-flex justify-content-between">
-                                <h6 class="mb-1">{{ room.name }} @ {{room.host}}</h6>
+                                <h6 class="mb-1">
+                                    {{ room.name }} @ 
+                                    <a href="{% url 'user-profile' room.host.username %}">{{ room.host.username }}</a>
+                                </h6>
                                 <small>Created: {{ room.created|date:"M d, Y" }}</small>
                             </div>
                             <p class="mb-1">{{ room.description|default:"No description available" }}</p>
